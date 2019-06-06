@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from datetime import date
-from crowdfunder.models import Project, Reward, Backing, Profile
+from crowdfunder.models import Project, Reward, Backing 
 
 
 def root(request):
