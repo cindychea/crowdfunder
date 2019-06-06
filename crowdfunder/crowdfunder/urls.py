@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from crowdfunder.views import *
+from crowdfunder import views
 
 urlpatterns = [
-    path('', root),
+    path('', views.root),
     path('admin/', admin.site.urls),
-    path('home/', home_page, name='home')
+    path('home/', views.home_page, name='home')
 ]
