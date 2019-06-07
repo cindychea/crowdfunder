@@ -5,9 +5,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_http_methods, require_POST
 from datetime import date
-from crowdfunder.models import Project, Reward, Backing 
+from crowdfunder.models import Project, Reward, Contribution
 from crowdfunder.forms import ProjectForm, LoginForm, SignUpForm, RewardForm
+
 
 
 def root(request):
@@ -23,8 +25,8 @@ def home_page(request):
     return HttpResponse(response)
 
 
-def display_project(request, id):
-    project = Project.objects.get(pk=id)
+def display_project(request, project_id):
+    project = Project.objects.get(pk=project_id)
     form = RewardForm()
     context = {
         'title': project.title,
@@ -40,7 +42,7 @@ def create_project(request):
             project = form.instance
             project.owner = request.user
             project.save()
-            return redirect('display_project', id=project.id)
+            return redirect('display_project', project_id=project.id)
     else:
         form = ProjectForm()
 
@@ -50,15 +52,15 @@ def create_project(request):
     })
 
 @login_required
-def add_reward(request, id):
+def add_reward(request, project_id):
     if request.method == 'POST':
-        project = Project.objects.get(pk=id)
+        project = Project.objects.get(pk=project_id)
         form = RewardForm(request.POST)
         if form.is_valid():
             reward = form.instance
             reward.project = project
             reward.save()
-            return redirect('display_project', id=project.pk)
+            return redirect('display_project', project_id=project.pk)
     else:
         form = RewardForm()
 
@@ -116,13 +118,24 @@ def profile_view(request, id):
         }
     return render(request, 'profile.html', context)
 
-def back_project(request, id, reward_id):
+# @post_required
+@login_required
+@require_http_methods(["POST"])
+def back_project(request, reward_id, project_id):
     reward = Reward.objects.get(pk=reward_id)
-    project = Project.objects.get(pk=id)
-    if request.method == 'POST':
-        reward.project = project
-        reward.user = request.user
-        project.total_fund()
+    project = Project.objects.get(pk=project_id)
+
+    contribution = Contribution()
+    contribution.reward = reward
+    contribution.project = project
+    contribution.user = request.user
+
+    if contribution.save():
+        return redirect('display_project', project_id=project.id)
+    else:
+        # TODO: Errors
+        return redirect('display_project', project_id=project.id)
+
 
 
     # when I click the reward it:

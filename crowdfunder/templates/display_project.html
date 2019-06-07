@@ -5,22 +5,27 @@
 <h4>Goal: {{ project.goal }}</h4>
 <h5>Started on: {{ project.start_date }}</h5>
 <h5>Ends on: {{ project.end_date }}</h5>
-<h3>Amount Raised: {{ project.total_fund }}</h3>
+<h3>Amount Raised: {{ project.total_contributions }}</h3>
 
 <h3>Rewards:</h3>
 
+
 {% for reward in project.rewards.all %}
-<ul>
-    <li>
-        <a href="#">{{ reward.title }}</a>
-        <p>{{ reward.description }}</p>
-        <p>${{ reward.amount }}</p>
-    </li>
-</ul>
+    <ul>
+        <li>
+            <p>{{ reward.title }}</p>
+            <p>{{ reward.description }}</p>
+            <p>${{ reward.amount }}</p>
+            <form action="{% url 'back_project' project_id=project.id reward_id=reward.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Choose This Reward</button>
+            </form>
+        </li>
+    </ul>
 {% endfor %}
 
 {% if project.owner == user %}
-<form method = 'POST' action="{% url 'add_reward' id=project.pk %}">
+<form method = 'POST' action="{% url 'add_reward' project_id=project.pk %}">
     {% csrf_token %}
 
     {{ form.as_p }}

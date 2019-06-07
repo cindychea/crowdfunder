@@ -5,7 +5,7 @@
     {% for project in projects %}
     <ul>
         <li>
-            <a href="{% url 'display_project' id=project.pk %}">Title: {{ project.title }}</a>
+            <a href="{% url 'display_project' project_id=project.pk %}">Title: {{ project.title }}</a>
             <p>Goal: {{ project.goal }}</p>
             <p>Description: {{ project.description }}</p>
             <p>Start Date: {{ project.start_date }}</p>

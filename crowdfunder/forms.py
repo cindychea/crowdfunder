@@ -4,7 +4,7 @@ from django.core import validators
 from django.core.validators import MinValueValidator
 import datetime as dt
 from datetime import datetime, timedelta
-from crowdfunder.models import Project, Reward, Backing
+from crowdfunder.models import Project, Reward, Contribution
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
