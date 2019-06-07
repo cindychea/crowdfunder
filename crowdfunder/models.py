@@ -13,7 +13,7 @@ class Project(models.Model):
 
     def total_fund(self):
         total = 0
-        for reward_value in self.reward.all():
+        for reward_value in self.rewards.all():
             total += (reward_value.amount * len(reward_value.backings.all()))
         return total
 

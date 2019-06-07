@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from datetime import date
 from crowdfunder.models import Project, Reward, Backing 
-from crowdfunder.forms import ProjectForm, LoginForm, SignUpForm
+from crowdfunder.forms import ProjectForm, LoginForm, SignUpForm, RewardForm
 
 
 def root(request):
@@ -25,7 +25,11 @@ def home_page(request):
 
 def display_project(request, id):
     project = Project.objects.get(pk=id)
-    context = {'project': project, 'title': project.title}
+    form = RewardForm()
+    context = {
+        'title': project.title,
+        'project': project,
+        'form':form}
     return render(request, 'display_project.html', context)
 
 @login_required
@@ -45,6 +49,15 @@ def create_project(request):
         'title': 'Create A Project'
     })
 
+def add_reward(request, id):
+    if request == 'POST':
+        project = Project.objects.get(pk=id)
+        form = RewardForm(request.POST)
+        if form.is_valid():
+            reward = form.instance
+            reward.project = project
+            reward.save()
+            return redirect('display_project', id=project.pk)
 
 def login_view(request):
     if request.user.is_authenticated:

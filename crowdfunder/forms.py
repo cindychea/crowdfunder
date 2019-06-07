@@ -14,6 +14,12 @@ class RewardForm(forms.ModelForm):
         model = Reward
         fields = ('title', 'amount', 'description')
 
+    def clean(self):
+        data = super().clean()
+        amount = data.get('amount')
+        if amount < 1:
+            self.add_error('amount', 'The amount must be $1 or more')
+
 
 class ProjectForm(ModelForm):
     title = forms.CharField(max_length=255)
