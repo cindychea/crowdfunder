@@ -49,8 +49,9 @@ def create_project(request):
         'title': 'Create A Project'
     })
 
+@login_required
 def add_reward(request, id):
-    if request == 'POST':
+    if request.method == 'POST':
         project = Project.objects.get(pk=id)
         form = RewardForm(request.POST)
         if form.is_valid():
@@ -58,6 +59,12 @@ def add_reward(request, id):
             reward.project = project
             reward.save()
             return redirect('display_project', id=project.pk)
+    else:
+        form = RewardForm()
+
+    return render(request, 'display_project.html', {
+        'project_form': form
+    })
 
 def login_view(request):
     if request.user.is_authenticated:
@@ -108,3 +115,16 @@ def profile_view(request, id):
         'user': user
         }
     return render(request, 'profile.html', context)
+
+def back_project(request, id, reward_id):
+    reward = Reward.objects.get(pk=reward_id)
+    project = Project.objects.get(pk=id)
+    if request.method == 'POST':
+        reward.project = project
+        reward.user = request.user
+        project.total_fund()
+
+
+    # when I click the reward it:
+    # adds the total to the goal
+    # shows on my profile page

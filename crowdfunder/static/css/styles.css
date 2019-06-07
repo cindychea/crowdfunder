@@ -1,0 +1,13 @@
+html {
+    box-sizing: border-box;
+    font-
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+.hero-title {
+    font-family: 'Pacifico', cursive;
+    font-size: 40px;
+    color: #3581B8;
+    text-decoration: none;
+}

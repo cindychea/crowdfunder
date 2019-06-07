@@ -12,18 +12,20 @@
 {% for reward in project.rewards.all %}
 <ul>
     <li>
-        <p>{{ reward.title }}</p>
+        <a href="#">{{ reward.title }}</a>
         <p>{{ reward.description }}</p>
         <p>${{ reward.amount }}</p>
     </li>
 </ul>
 {% endfor %}
 
+{% if project.owner == user %}
 <form method = 'POST' action="{% url 'add_reward' id=project.pk %}">
     {% csrf_token %}
 
     {{ form.as_p }}
     <button type="submit">Add Reward</button>
 </form>
+{% endif %}
 
 {% endblock %}

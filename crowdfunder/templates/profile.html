@@ -11,7 +11,7 @@
     {% for project in user.projects.all %}
         <ul>
             <li>
-                <p>Title: {{ project.title }}</p>
+                <a href="{% url 'display_project' id=project.pk %}">Title: {{ project.title }}</a>
                 <p>Goal: {{ project.goal }}</p>
                 <p>Description: {{ project.description }}</p>
                 <p>Start Date: {{ project.start_date }}</p>

@@ -2,9 +2,15 @@
 
 {% block content %}
     <h2>Featured Projects:</h2>
+    {% for project in projects %}
     <ul>
         <li>
-            All the projects
+            <a href="{% url 'display_project' id=project.pk %}">Title: {{ project.title }}</a>
+            <p>Goal: {{ project.goal }}</p>
+            <p>Description: {{ project.description }}</p>
+            <p>Start Date: {{ project.start_date }}</p>
+            <p>End Date: {{ project.end_date }}</p>
         </li>
     </ul>
+    {% endfor %}
 {% endblock %}
