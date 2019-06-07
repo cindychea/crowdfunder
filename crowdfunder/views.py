@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, reverse, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from datetime import date
 from crowdfunder.models import Project, Reward, Backing 
@@ -16,7 +17,7 @@ def root(request):
 def home_page(request):
     context = {
         'title': 'Crowdfunder',
-        # 'projects': Project.objects.all(),
+        'projects': Project.objects.all(),
     }
     response = render(request, 'home.html', context)
     return HttpResponse(response)
@@ -81,3 +82,11 @@ def signup_view(request):
 
     context = {'form': form, 'title': 'Sign Up'}
     return render(request, 'signup.html', context)
+
+@login_required
+def profile_view(request, id):
+    user = User.objects.get(pk=id)
+    context = {
+        'user': user
+        }
+    return render(request, 'profile.html', context)
