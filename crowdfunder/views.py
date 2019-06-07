@@ -61,7 +61,7 @@ def login_view(request):
     context = {'form': form, 'title': 'Login'}
     return render(request, 'login.html', context)
 
-
+@login_required
 def logout_view(request):
     logout(request)
     return redirect('home')
