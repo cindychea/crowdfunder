@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Projects</h2>
+    <ul>
+    {% for project in projects %}
+        <li>
+            {{ project.title }}
+            {{ project.goal }}
+            {{ project.description }}
+            {{ project.start_date }} to {{ project.end_date }}
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}
