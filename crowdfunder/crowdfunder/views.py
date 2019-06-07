@@ -14,7 +14,12 @@ def root(request):
 
 
 def home_page(request):
-    pass
+    context = {
+        'title': 'Crowdfunder',
+        # 'projects': Project.objects.all(),
+    }
+    response = render(request, 'home.html', context)
+    return HttpResponse(response)
 
 def login_view(request):
     if request.user.is_authenticated:
@@ -23,7 +28,7 @@ def login_view(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
-            pw = form.cleaned['password']
+            pw = form.cleaned_data['password']
             user = authenticate(username=username, password=pw)
             if user is not None:
                 login(request, user)
@@ -33,7 +38,7 @@ def login_view(request):
     else:
         form=LoginForm()
 
-    context = {'form': form}
+    context = {'form': form, 'title': 'Login'}
     return render(request, 'login.html', context)
 
 def logout_view(request):
@@ -53,5 +58,5 @@ def signup_view(request):
     else:
         form = SignUpForm()
 
-    context = {'form': form}
+    context = {'form': form, 'title': 'Sign Up'}
     return render(request, 'signup.html', context)
