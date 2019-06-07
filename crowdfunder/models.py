@@ -10,6 +10,12 @@ class Project(models.Model):
     end_date = models.DateField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='projects')
 
+    def total_fund(self):
+        total = 0
+        for reward_value in self.reward.all():
+            total += (reward_value.amount * len(reward_value.backings.all()))
+        return total
+
 
 class Reward(models.Model):
     title = models.CharField(max_length=255)
