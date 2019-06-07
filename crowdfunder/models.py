@@ -20,4 +20,4 @@ class Reward(models.Model):
 
 class Backing(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='backings')
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='backings')
+    reward = models.ForeignKey(Reward, on_delete=models.CASCADE, related_name='backings')
