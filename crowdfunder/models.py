@@ -7,6 +7,7 @@ class Project(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     goal = models.IntegerField()
+    goal_reached = models.BooleanField(default=False)
     start_date = models.DateField(default=date.today)
     end_date = models.DateField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='projects')
@@ -22,7 +23,11 @@ class Project(models.Model):
     def expired_project(self):
         if date.today() > self.end_date:
             self.expired = True
+            if self.total_contributions() >= self.goal:
+                self.goal_reached = True
+                return self.goal_reached
         return self.expired
+
 
 class Reward(models.Model):
     title = models.CharField(max_length=255)

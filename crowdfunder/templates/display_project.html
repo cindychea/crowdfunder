@@ -2,11 +2,18 @@
 {% block content %}
 
 <h2>{{ project.title }}</h2>
-<h4>Goal: {{ project.goal }}</h4>
+<h4>Goal: ${{ project.goal }}</h4>
 <h5>Started on: {{ project.start_date }}</h5>
 <h5>Ends on: {{ project.end_date }}</h5>
 <h3>Amount Raised: ${{ project.total_contributions }}</h3>
 
+{% if project.expired_project == True %}
+    {% if project.goal_reached == True %}
+        <h3>YOU'VE REACHED YOUR GOAL!</h3>
+    {% else %}
+        <h3>Sorry, you didn't reach your goal. =(</h3>
+    {% endif %}
+{% endif %}
 
 <h3>Rewards:</h3>
 
