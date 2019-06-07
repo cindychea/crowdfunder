@@ -3,7 +3,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, reverse, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+
+# from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods, require_POST
 from datetime import date

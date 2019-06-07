@@ -1,6 +1,11 @@
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from datetime import date
+
+class User(AbstractUser):
+    def total_contributions(self):
+        return sum([c.reward.amount for c in self.contributions.all()])    
 
 
 class Project(models.Model):
@@ -16,6 +21,11 @@ class Project(models.Model):
         # for reward_value in self.rewards.all():
         #     total += (reward_value.amount * len(reward_value.backings.all()))
         total = sum([c.reward.amount for c in self.contributions.all()])
+        return total
+    
+    # HELP: create function to calculate total contributions
+    def user_contributions_per_project(self):
+        total = sum([c.reward.amount for c in self.contributions.filter(c__user=request.user)])
         return total
     
     def project_contributors(self):
@@ -36,3 +46,8 @@ class Contribution(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='contributions')
     reward = models.ForeignKey(Reward, on_delete=models.CASCADE, related_name='contributions')
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='contributions')
+
+    def total_contributions_per_user(self): 
+        total = sum([c.reward.amount for c in self.objects.all().filter(user=request.user)])
+        return total
+
