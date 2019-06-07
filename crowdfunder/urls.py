@@ -25,5 +25,6 @@ urlpatterns = [
     path('project/create', views.create_project, name='create_project'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
-    path('signup/', views.signup_view, name='signup')
+    path('signup/', views.signup_view, name='signup'),
+    path('profile/<int:id>', views.profile_view, name='profile')
 ]

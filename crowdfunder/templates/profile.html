@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>{{ user.username }}'s Profile</h2>
+
+    <p>First Name: {{ user.first_name }}</p>
+    <p>Last Name: {{ user.last_name }}</p>
+    <p>Email: {{ user.email }}</p>
+
+    <h3>Projects</h3>
+    {% for project in user.projects.all %}
+        <ul>
+            <li>
+                <p>Title: {{ project.title }}</p>
+                <p>Goal: {{ project.goal }}</p>
+                <p>Description: {{ project.description }}</p>
+                <p>Start Date: {{ project.start_date }}</p>
+                <p>End Date: {{ project.end_date }}</p>
+            </li>
+        </ul>
+    {% endfor %}
+{% endblock %}
