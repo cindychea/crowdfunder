@@ -3,7 +3,7 @@ from django.forms import ModelForm, DateInput
 from django.core import validators
 from django.core.validators import MinValueValidator
 import datetime as dt
-from datetime import datetime
+from datetime import datetime, timedelta
 from crowdfunder.models import Project, Reward, Backing
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -20,15 +20,12 @@ class ProjectForm(ModelForm):
     description = forms.Textarea()
     goal = forms.IntegerField(validators=[MinValueValidator(1, message='Goal must be a positive number')])
     start_date = forms.DateField(widget=DateInput(attrs={'type': 'date', 'min': dt.date.today()}))
-    end_date = forms.DateField(widget=DateInput(attrs={'type': 'date', 'min': dt.date.today()}))
+    end_date = forms.DateField(widget=DateInput(attrs={'type': 'date', 'min': (dt.date.today() + dt.timedelta(days=1))}))
 
     class Meta:
         model = Project
         fields = ['title', 'description', 'goal', 'start_date', 'end_date']
 
-    def clean(self):
-        goal = self.cleaned_data.get('goal')
-    
 class LoginForm(forms.Form):
     username = forms.CharField(label="User Name", max_length=64)
     password = forms.CharField(widget=forms.PasswordInput())

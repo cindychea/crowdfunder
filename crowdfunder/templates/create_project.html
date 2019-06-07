@@ -2,7 +2,8 @@
 {% block content %}
 
 <h2>Create A Project</h2>
-<form method='POST' action="{% url 'create_project' %}">
+
+<form action="{% url 'create_project' %}" method="POST">
     {% csrf_token %}
     {{ project_form.as_p }}
     <button type="submit">Submit</button>

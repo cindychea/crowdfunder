@@ -24,20 +24,25 @@ def home_page(request):
 
 def display_project(request, id):
     project = Project.objects.get(pk=id)
-    context = {'project': project}
+    context = {'project': project, 'title': project.title}
     return render(request, 'display_project.html', context)
 
-
+@login_required
 def create_project(request):
-    project_form = ProjectForm()
-    if request == 'POST':
+    if request.method == 'POST':
         form = ProjectForm(request.POST)
         if form.is_valid():
-            project = form.save()
-            return redirect(reverse('display_project'))
+            project = form.instance
+            project.owner = request.user
+            project.save()
+            return redirect('display_project', id=project.id)
     else:
-        context = {'project_form': project_form, 'title': 'Create A Project'}
-    return render(request, 'create_project.html', context)
+        form = ProjectForm()
+
+    return render(request, 'create_project.html', {
+        'project_form': form,
+        'title': 'Create A Project'
+    })
 
 
 def login_view(request):
