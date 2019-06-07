@@ -20,7 +20,7 @@ class Project(models.Model):
         return total
 
     def countdown(self):
-        now = date.today()
+        now = date.now()
         time_left = self.end_date - now
         return time_left.days
 
