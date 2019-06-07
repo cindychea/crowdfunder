@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
-from datetime import date
+from datetime import date, datetime
+
 
 
 class Project(models.Model):
@@ -17,6 +18,11 @@ class Project(models.Model):
         #     total += (reward_value.amount * len(reward_value.backings.all()))
         total = sum([c.reward.amount for c in self.contributions.all()])
         return total
+
+    def countdown(self):
+        now = date.today()
+        time_left = self.end_date - now
+        return time_left.days
 
 class Reward(models.Model):
     title = models.CharField(max_length=255)
