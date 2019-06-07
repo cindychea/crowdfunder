@@ -20,5 +20,7 @@ from crowdfunder import views
 urlpatterns = [
     path('', views.root),
     path('admin/', admin.site.urls),
-    path('home/', views.home_page, name='home')
+    path('home/', views.home_page, name='home'),
+    path('project/<int:id>', views.display_project, name='display_project'),
+    path('project/create', views.create_project, name='create_project')
 ]

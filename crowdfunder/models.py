@@ -1,12 +1,13 @@
 from django.contrib.auth.models import User
 from django.db import models
+from datetime import date
 
 
 class Project(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     goal = models.IntegerField()
-    start_date = models.DateField()
+    start_date = models.DateField(default=date.today)
     end_date = models.DateField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='owned_projects')
 
