@@ -118,7 +118,6 @@ def profile_view(request, id):
         }
     return render(request, 'profile.html', context)
 
-# @post_required
 @login_required
 @require_http_methods(["POST"])
 def back_project(request, reward_id, project_id):
@@ -136,8 +135,3 @@ def back_project(request, reward_id, project_id):
         # TODO: Errors
         return redirect('display_project', project_id=project.id)
 
-
-
-    # when I click the reward it:
-    # adds the total to the goal
-    # shows on my profile page

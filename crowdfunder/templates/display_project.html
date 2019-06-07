@@ -7,6 +7,10 @@
 <h5>Ends on: {{ project.end_date }}</h5>
 <h3>Amount Raised: {{ project.total_contributions }}</h3>
 
+{% if request.user.username in project.project_contributors %}
+<h6>* You have already contributed to this project *</h6>
+{% endif %}
+
 <h3>Rewards:</h3>
 
 

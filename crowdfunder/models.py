@@ -17,6 +17,13 @@ class Project(models.Model):
         #     total += (reward_value.amount * len(reward_value.backings.all()))
         total = sum([c.reward.amount for c in self.contributions.all()])
         return total
+    
+    def project_contributors(self):
+        contributors = []
+        all_contributions = self.contributions.all()
+        for contribution in all_contributions:
+            contributors.append(contribution.user.username)
+        return set(contributors)
 
 class Reward(models.Model):
     title = models.CharField(max_length=255)
