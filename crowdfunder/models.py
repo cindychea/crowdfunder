@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from datetime import date
+from datetime import date, datetime
 
 
 class Project(models.Model):
@@ -10,6 +10,7 @@ class Project(models.Model):
     start_date = models.DateField(default=date.today)
     end_date = models.DateField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='projects')
+    expired = models.BooleanField(default=False)
 
     def total_contributions(self):
         # total = 0
@@ -17,6 +18,11 @@ class Project(models.Model):
         #     total += (reward_value.amount * len(reward_value.backings.all()))
         total = sum([c.reward.amount for c in self.contributions.all()])
         return total
+
+    def expired_project(self):
+        if date.today() > self.end_date:
+            self.expired = True
+        return self.expired
 
 class Reward(models.Model):
     title = models.CharField(max_length=255)

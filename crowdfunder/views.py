@@ -135,9 +135,3 @@ def back_project(request, reward_id, project_id):
     else:
         # TODO: Errors
         return redirect('display_project', project_id=project.id)
-
-
-
-    # when I click the reward it:
-    # adds the total to the goal
-    # shows on my profile page
