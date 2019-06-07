@@ -8,16 +8,16 @@ class Project(models.Model):
     goal = models.IntegerField()
     start_date = models.DateField()
     end_date = models.DateField()
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='owned_projects')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='projects')
 
 
 class Reward(models.Model):
     title = models.CharField(max_length=255)
     amount = models.IntegerField()
     description = models.TextField()
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='project_rewards')
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='rewards')
 
 
 class Backing(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='backers')
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='projects_backed')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='backings')
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='backings')
