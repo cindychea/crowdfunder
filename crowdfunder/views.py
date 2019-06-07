@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from datetime import date
 from crowdfunder.models import Project, Reward, Backing 
-from crowdfunder.forms import ProjectForm
+from crowdfunder.forms import ProjectForm, LoginForm, SignUpForm
 
 
 def root(request):
@@ -14,13 +14,19 @@ def root(request):
 
 
 def home_page(request):
-    projects = Project.objects.all()
-    return HttpResponse(render(request, 'index.html', {'projects': projects}))
+    context = {
+        'title': 'Crowdfunder',
+        # 'projects': Project.objects.all(),
+    }
+    response = render(request, 'home.html', context)
+    return HttpResponse(response)
+
 
 def display_project(request, id):
     project = Project.objects.get(pk=id)
     context = {'project': project}
     return render(request, 'display_project.html', context)
+
 
 def create_project(request):
     project_form = ProjectForm()
@@ -32,3 +38,46 @@ def create_project(request):
     else:
         context = {'project_form': project_form, 'title': 'Create A Project'}
     return render(request, 'create_project.html', context)
+
+
+def login_view(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            pw = form.cleaned_data['password']
+            user = authenticate(username=username, password=pw)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                form.add_error('username', 'Login Failed')
+    else:
+        form=LoginForm()
+
+    context = {'form': form, 'title': 'Login'}
+    return render(request, 'login.html', context)
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
+
+
+def signup_view(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('home')
+    else:
+        form = SignUpForm()
+
+    context = {'form': form, 'title': 'Sign Up'}
+    return render(request, 'signup.html', context)
