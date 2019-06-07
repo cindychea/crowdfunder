@@ -9,6 +9,8 @@
 <h5>Ends on: {{ project.end_date }}</h5>
 <h3>Amount Raised: {{ project.total_contributions }}</h3>
 
+<p>{{ project.description }}</p>
+
 <h3>Rewards:</h3>
 {% for reward in project.rewards.all %}
     <ul>
@@ -35,4 +37,12 @@
 </form>
 {% endif %}
 
+<p>Other Projects by this Creator:</p>
+{% for project in projects %}
+    <ul>
+        <li>
+            <a href="{% url 'display_project' project_id=project.id %}">{{ project.title }}</a>
+        </li>
+    </ul>
+{% endfor %}
 {% endblock %}

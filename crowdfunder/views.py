@@ -27,11 +27,14 @@ def home_page(request):
 
 def display_project(request, project_id):
     project = Project.objects.get(pk=project_id)
+    projects = Project.objects.filter(owner=project.owner)
     form = RewardForm()
     context = {
         'title': project.title,
         'project': project,
-        'form':form}
+        'projects': projects,
+        'form':form
+        }
     return render(request, 'display_project.html', context)
 
 @login_required
