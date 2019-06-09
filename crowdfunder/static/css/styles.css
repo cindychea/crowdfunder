@@ -1,6 +1,7 @@
 html {
     box-sizing: border-box;
-    font-
+    font-family: 'Nunito', sans-serif;
+    background-color: #FFF8F0;
 }
 *, *:before, *:after {
     box-sizing: inherit;
@@ -10,4 +11,32 @@ html {
     font-size: 40px;
     color: #3581B8;
     text-decoration: none;
+    padding-top: 0;
+    border-bottom: 5px solid darkslategrey;
+}
+.hero-title h1 {
+    margin: 0;
+}
+header {
+    display: inline-flex;
+    align-items: center;
+}
+header div a {
+    display: inline-flex;
+    margin-top: 30px;
+    text-decoration: none;
+    background-color: #FCB07E;
+    border-radius: 5px;
+    padding: 10px;
+    color: darkslategrey;
+}
+footer {
+    background-color: #FCB07E;
+    color: darkslategrey;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 10px;
 }
