@@ -4,7 +4,8 @@
 <ul>
     {% for project in projects %}
         <li>
-            <a href="{% url 'display_project' id=project.pk %}">{{ project.name }}</a>
+            <a href="{% url 'display_project' project_id=project.pk %}">{{ project.title }}</a>
+            <p>{{ project.description }}</p>
         </li>
     {% endfor %}
 </ul>
