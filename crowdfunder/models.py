@@ -33,7 +33,10 @@ class Reward(models.Model):
     title = models.CharField(max_length=255)
     amount = models.IntegerField()
     description = models.TextField()
+    limit = models.IntegerField()
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='rewards')
+
+    
 
 
 class Contribution(models.Model):

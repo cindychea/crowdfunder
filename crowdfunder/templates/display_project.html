@@ -23,6 +23,9 @@
             <p>{{ reward.title }}</p>
             <p>{{ reward.description }}</p>
             <p>${{ reward.amount }}</p>
+            {% if reward.limit >= 1 %}
+                <p>Limit: {{ reward.limit }}</p>
+            {% endif %}
             {% if project.owner != user %}
                 {% if project.expired_project == False %}
                     <form action="{% url 'back_project' project_id=project.id reward_id=reward.id %}" method="POST">
