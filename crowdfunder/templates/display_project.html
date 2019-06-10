@@ -3,6 +3,9 @@
 
 <h2>{{ project.title }}</h2>
 <h4>Goal: ${{ project.goal }}</h4>
+<h3>Created By: <a href="{% url 'profile' id=project.owner.pk %}">{{ project.owner }}</a></h3>
+<h3>Days Remaining: {{ project.countdown }}</h3>
+<h4>Goal: {{ project.goal }}</h4>
 <h5>Started on: {{ project.start_date }}</h5>
 <h5>Ends on: {{ project.end_date }}</h5>
 <h3>Amount Raised: ${{ project.total_contributions }}</h3>
@@ -16,7 +19,9 @@
 {% endif %}
 
 <h3>Rewards:</h3>
+<p>{{ project.description }}</p>
 
+<h3>Rewards:</h3>
 {% for reward in project.rewards.all %}
     <ul>
         <li>
@@ -50,4 +55,12 @@
 </form>
 {% endif %}
 
+<p>Other Projects by this Creator:</p>
+{% for project in projects %}
+    <ul>
+        <li>
+            <a href="{% url 'display_project' project_id=project.id %}">{{ project.title }}</a>
+        </li>
+    </ul>
+{% endfor %}
 {% endblock %}

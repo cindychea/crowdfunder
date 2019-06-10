@@ -28,6 +28,10 @@ class Project(models.Model):
                 return self.goal_reached
         return self.expired
 
+    def countdown(self):
+        now = date.now()
+        time_left = self.end_date - now
+        return time_left.days
 
 class Reward(models.Model):
     title = models.CharField(max_length=255)
