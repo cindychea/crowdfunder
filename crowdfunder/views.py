@@ -11,7 +11,7 @@ User = get_user_model()
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods, require_POST
 from datetime import date
-from crowdfunder.models import Project, Reward, Contribution
+from crowdfunder.models import Project, Reward, Contribution, Category
 from crowdfunder.forms import ProjectForm, LoginForm, SignUpForm, RewardForm
 
 
@@ -24,6 +24,7 @@ def home_page(request):
     context = {
         'title': 'Crowdfunder',
         'projects': Project.objects.all(),
+        'categories': Category.objects.all()
     }
     response = render(request, 'home.html', context)
     return HttpResponse(response)
@@ -142,15 +143,12 @@ def back_project(request, reward_id, project_id):
         # TODO: Errors
         return redirect('display_project', project_id=project.id)
 
-# /categories/<int:id>
 def categories_view(request, category_id):
-    query = request.GET['query']
-    # results = Project.objects.all().filter(category=query)
-    projects = Category.objects.get(id=category_id).projects
-
+    category = Category.objects.get(pk=category_id)
+    projects = Project.objects.filter(category=category)
     context = {
-        'projects': results,
-        'query': query,
+        'category': category,
+        'projects': projects
     }
     response = render(request, 'category_display.html', context)
     return HttpResponse(response)

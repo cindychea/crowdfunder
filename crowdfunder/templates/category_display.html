@@ -1,5 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-HI!
+<h1>{{category.name}}</h1>
+{% for project in projects %}
+    <ul>
+        <li>
+            <a href="{% url 'display_project' project_id=project.pk %}">{{ project.title }}</a>
+            <p>Goal: {{ project.goal }}</p>
+            <p>Category: {{ project.category.name }}</p>
+            <p>Description: {{ project.description }}</p>
+            <p>Start Date: {{ project.start_date }}</p>
+            <p>End Date: {{ project.end_date }}</p>
+        </li>
+    </ul>
+{% endfor %}
 {% endblock %}

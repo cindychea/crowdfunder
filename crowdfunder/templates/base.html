@@ -25,29 +25,13 @@
             <a href="{% url 'create_project' %}">Create A Project</a>
         </div>  
         <nav>
+            {% for category in categories %}
             <ul>
                 <li>
-                    <a href="{% url 'categories' %}">Arts</a>
-                </li>
-                <li>
-                    <a href="#">Comics & Illustrations</a>
-                </li>
-                <li>
-                    <a href="#">Design & Tech</a>
-                </li>
-                <li>
-                    <a href="#">Film</a>
-                </li>
-                <li>
-                    <a href="#">Food & Craft</a>
-                </li>
-                <li>
-                    <a href="#">Games</a>
-                </li>
-                <li>
-                    <a href="#">Music</a>
+                    <a href="{% url 'categories' category_id=category.pk %}">{{ category.name }}</a>
                 </li>
             </ul>
+            {% endfor %}
         </nav>
     </header>
     <main>
