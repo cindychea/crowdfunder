@@ -4,6 +4,8 @@ from django.db import models
 from datetime import date, datetime
 
 class User(AbstractUser):
+    bio = models.TextField(max_length=500, blank=True, null=True)
+
     def total_contributions(self):
         return sum([c.reward.amount for c in self.contributions.all()])
 
