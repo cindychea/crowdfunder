@@ -30,7 +30,6 @@ class Project(models.Model):
             contributors.append(contribution.user.username)
         return set(contributors)
 
-
     def expired_project(self):
         if date.today() > self.end_date:
             self.expired = True
@@ -43,6 +42,15 @@ class Project(models.Model):
         now = date.today()
         time_left = self.end_date - now
         return time_left.days
+
+    def success():
+        all_projects = Project.objects.all()
+        projects = []
+        for project in all_projects:
+            if project.total_contributions() >= project.goal:
+                project.goal_reached = True
+                projects.append(project)
+        return projects
 
 class Reward(models.Model):
     title = models.CharField(max_length=255)
@@ -64,3 +72,8 @@ class Contribution(models.Model):
     reward = models.ForeignKey(Reward, on_delete=models.CASCADE, related_name='contributions')
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='contributions')
 
+    def grand_total():
+        gt = 0
+        for contribution in Contribution.objects.all():
+            gt = gt + contribution.reward.amount
+        return gt

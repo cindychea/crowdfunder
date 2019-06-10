@@ -19,15 +19,14 @@ from crowdfunder.forms import ProjectForm, LoginForm, SignUpForm, RewardForm
 def root(request):
     return HttpResponseRedirect('/home')
 
-
 def home_page(request):
     context = {
         'title': 'Crowdfunder',
         'projects': Project.objects.all(),
+        'gt': Contribution.grand_total()
     }
     response = render(request, 'home.html', context)
     return HttpResponse(response)
-
 
 def display_project(request, project_id):
     project = Project.objects.get(pk=project_id)
@@ -40,6 +39,21 @@ def display_project(request, project_id):
         'form':form
         }
     return render(request, 'display_project.html', context)
+
+@login_required
+def delete_project(request, project_id):
+    project = Project.objects.get(pk=project_id)
+    user = User.objects.get(id=request.user.id)
+    if request.user == project.owner and request.method == 'POST':
+        if project.contributions != 0:
+            context = {'project': project, 'error': 'You cannot delete a project that has contributions.'}
+            return render(request, 'display_project.html', context)
+        else:
+            project.delete()
+            return redirect('profile', id=user.id)
+    else:
+        context = {'project': project}
+        return render(request, 'display_project.html', context)
 
 @login_required
 def create_project(request):
@@ -57,6 +71,10 @@ def create_project(request):
         'project_form': form,
         'title': 'Create A Project'
     })
+
+def success(request):
+    projects = Project.success()
+    return render(request, 'success.html', {'projects': projects})
 
 @login_required
 def add_reward(request, project_id):

@@ -1,17 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Total Money Raised: $ {{ gt }}</h2>
-    <a href="{% url 'success' %}"><h2>Successful Projects</a></h2></a>
-    <h2>Featured Projects:</h2>
+
+    <h2>Successful Projects</h2>
+    <h4>All of the following projects met their goal!</h4>
     {% for project in projects %}
     <ul>
         <li>
             <a href="{% url 'display_project' project_id=project.pk %}">Title: {{ project.title }}</a>
             <p>Goal: {{ project.goal }}</p>
             <p>Description: {{ project.description }}</p>
-            <p>Start Date: {{ project.start_date }}</p>
-            <p>End Date: {{ project.end_date }}</p>
         </li>
     </ul>
     {% endfor %}
