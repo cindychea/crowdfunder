@@ -18,6 +18,9 @@ class Project(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='projects')
     expired = models.BooleanField(default=False)
     
+    def total_contributions(self):
+        return sum([c.reward.amount for c in self.contributions.all()])
+
     def project_contributors(self):
         contributors = []
         all_contributions = self.contributions.all()
@@ -49,6 +52,9 @@ class Reward(models.Model):
     def total_purchased(self):
         total = self.contributions.all().count()
         return total
+
+    def available(self):
+        return self.total_purchased() < self.limit or self.limit is None
 
 
 class Contribution(models.Model):
