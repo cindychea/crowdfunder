@@ -21,6 +21,9 @@ class Project(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='projects')
     expired = models.BooleanField(default=False)
     tags = TagField()
+
+    def __str__(self):
+        return self.title
     
     def total_contributions(self):
         return sum([c.reward.amount for c in self.contributions.all()])
@@ -53,6 +56,9 @@ class Reward(models.Model):
     description = models.TextField()
     limit = models.IntegerField(null=True, blank=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='rewards')
+
+    def __str__(self):
+        return f"{self.title} - {self.project}"
 
     def total_purchased(self):
         total = self.contributions.all().count()
