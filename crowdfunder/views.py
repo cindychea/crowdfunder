@@ -165,7 +165,7 @@ def back_project(request, reward_id, project_id):
 
 def search(request):
     query = request.GET['query']
-    search_results = Project.objects.filter(tags__icontains=query)
+    search_results = Project.objects.filter(title__icontains=query) | Project.objects.filter(description__icontains=query) | Project.objects.filter(tags__icontains=query)
     context = {
         'projects': search_results,
         'query': query
