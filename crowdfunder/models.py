@@ -35,7 +35,7 @@ class Project(models.Model):
         return self.expired
 
     def countdown(self):
-        now = date.now()
+        now = date.today()
         time_left = self.end_date - now
         return time_left.days
 
