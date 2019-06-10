@@ -60,7 +60,10 @@ class Project(models.Model):
     def countdown(self):
         now = date.today()
         time_left = self.end_date - now
-        return time_left.days
+        if time_left.days <= 0:
+            return 'None'
+        else:
+            return time_left.days
 
     def success():
         all_projects = Project.objects.all()
