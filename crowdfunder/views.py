@@ -141,10 +141,10 @@ def back_project(request, reward_id, project_id):
 
 def search(request):
     query = request.GET['query']
-    search_results = Projects.objects.filter(tags__icontains=query)
+    search_results = Project.objects.filter(tags__icontains=query)
     context = {
         'projects': search_results,
         'query': query
     }
     response = render(request, 'search.html', context)
-    return HttpRespnose(response)
+    return HttpResponse(response)
