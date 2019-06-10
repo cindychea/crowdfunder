@@ -21,11 +21,17 @@
         <a href="{% url 'login' %}">Login</a>
         <a href="{% url 'signup' %}">Sign up</a>
         {% endif %}
-        <!-- Search Bar go here -->
         <a href="{% url 'create_project' %}">Create A Project</a>
         </div>  
     </header>
     <main>
+        <form action="{% url 'search' %}" method="get">
+            <label for="project-search">
+                <span>Find a Project:</span>
+                <input type="search" id="project-search" name="query" value="{{ query }}"/>
+            </label>
+            <input type="submit" value="Search"/>
+        </form>
         {% block content %}
         {% endblock %}
     </main>

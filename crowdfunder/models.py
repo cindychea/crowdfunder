@@ -2,6 +2,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from datetime import date, datetime
+from tagging.fields import TagField
 
 class User(AbstractUser):
     bio = models.TextField(max_length=500, blank=True, null=True)
@@ -19,6 +20,7 @@ class Project(models.Model):
     end_date = models.DateField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='projects')
     expired = models.BooleanField(default=False)
+    tags = TagField()
     
     def total_contributions(self):
         return sum([c.reward.amount for c in self.contributions.all()])
@@ -43,6 +45,7 @@ class Project(models.Model):
         now = date.today()
         time_left = self.end_date - now
         return time_left.days
+
 
 class Reward(models.Model):
     title = models.CharField(max_length=255)

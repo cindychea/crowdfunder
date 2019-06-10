@@ -19,7 +19,6 @@ from crowdfunder.forms import ProjectForm, LoginForm, SignUpForm, RewardForm
 def root(request):
     return HttpResponseRedirect('/home')
 
-
 def home_page(request):
     context = {
         'title': 'Crowdfunder',
@@ -27,7 +26,6 @@ def home_page(request):
     }
     response = render(request, 'home.html', context)
     return HttpResponse(response)
-
 
 def display_project(request, project_id):
     project = Project.objects.get(pk=project_id)
@@ -100,7 +98,6 @@ def logout_view(request):
     logout(request)
     return redirect('home')
 
-
 def signup_view(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -141,3 +138,13 @@ def back_project(request, reward_id, project_id):
     else:
         # TODO: Errors
         return redirect('display_project', project_id=project.id)
+
+def search(request):
+    query = request.GET['query']
+    search_results = Projects.objects.filter(tags__icontains=query)
+    context = {
+        'projects': search_results,
+        'query': query
+    }
+    response = render(request, 'search.html', context)
+    return HttpRespnose(response)
