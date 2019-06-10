@@ -4,7 +4,7 @@ from django.core import validators
 from django.core.validators import MinValueValidator
 import datetime as dt
 from datetime import datetime, timedelta
-from crowdfunder.models import Project, Reward, Contribution
+from crowdfunder.models import Project, Reward, Contribution, Category
 
 # from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
@@ -26,23 +26,13 @@ class RewardForm(forms.ModelForm):
 
 
 class ProjectForm(ModelForm):
-
-    category_options = [
-        ('Arts', 'Arts'),
-        ('Comics & Illustration', 'Comics & Illustration'),
-        ('Design & Tech', 'Design & Tech'),
-        ('Film', 'Film'),
-        ('Food & Craft', 'Food & Craft'),
-        ('Games', 'Games'),
-        ('Music', 'Music')
-    ]
-
     title = forms.CharField(max_length=255)
     description = forms.Textarea()
     goal = forms.IntegerField(validators=[MinValueValidator(1, message='Goal must be a positive number')])
     start_date = forms.DateField(widget=DateInput(attrs={'type': 'date', 'min': dt.date.today()}))
     end_date = forms.DateField(widget=DateInput(attrs={'type': 'date', 'min': (dt.date.today() + dt.timedelta(days=1))}))
-    category = forms.CharField(label='Catergories: ', widget=forms.Select(choices=category_options))
+    category = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label=None)
+
 
     class Meta:
         model = Project

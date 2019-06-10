@@ -141,3 +141,16 @@ def back_project(request, reward_id, project_id):
     else:
         # TODO: Errors
         return redirect('display_project', project_id=project.id)
+
+# /categories/<int:id>
+def categories_view(request, category_id):
+    query = request.GET['query']
+    # results = Project.objects.all().filter(category=query)
+    projects = Category.objects.get(id=category_id).projects
+
+    context = {
+        'projects': results,
+        'query': query,
+    }
+    response = render(request, 'category_display.html', context)
+    return HttpResponse(response)
