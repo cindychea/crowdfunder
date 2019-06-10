@@ -5,7 +5,6 @@
 <h4>Goal: ${{ project.goal }}</h4>
 <h3>Created By: <a href="{% url 'profile' id=project.owner.pk %}">{{ project.owner }}</a></h3>
 <h3>Days Remaining: {{ project.countdown }}</h3>
-<h4>Goal: {{ project.goal }}</h4>
 <h5>Started on: {{ project.start_date }}</h5>
 <h5>Ends on: {{ project.end_date }}</h5>
 <h3>Amount Raised: ${{ project.total_contributions }}</h3>
@@ -14,7 +13,6 @@
 <h6>* You have already contributed to this project *</h6>
 {% endif %}
 
-<h3>Rewards:</h3>
 {% if project.expired_project == True %}
     {% if project.goal_reached == True %}
         <h3>YOU'VE REACHED YOUR GOAL!</h3>
@@ -22,9 +20,6 @@
         <h3>Sorry, you didn't reach your goal. =(</h3>
     {% endif %}
 {% endif %}
-
-<h3>Rewards:</h3>
-<p>{{ project.description }}</p>
 
 <h3>Rewards:</h3>
 {% for reward in project.rewards.all %}
