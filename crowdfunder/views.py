@@ -23,7 +23,11 @@ def home_page(request):
     context = {
         'title': 'Crowdfunder',
         'projects': Project.objects.all(),
-        'gt': Contribution.grand_total()
+        'gt': Contribution.grand_total(),
+        'funded': Project.funded(), 
+        'percentage_funded': Project.percentage_funded(),
+        'percentage_failed': Project.percentage_failed(),
+        'percentage_in_progress': Project.percentage_in_progress()
     }
     response = render(request, 'home.html', context)
     return HttpResponse(response)
