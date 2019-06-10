@@ -8,6 +8,7 @@
 <h5>Started on: {{ project.start_date }}</h5>
 <h5>Ends on: {{ project.end_date }}</h5>
 <h3>Amount Raised: ${{ project.total_contributions }}</h3>
+<p>Category: {{ project.category.name }}</p>
 
 {% if request.user.username in project.project_contributors %}
 <h6>* You have already contributed to this project *</h6>

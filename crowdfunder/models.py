@@ -3,12 +3,25 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from datetime import date, datetime
 
+
+# django.db.utils.IntegrityError:
+# The row in table 'crowdfunder_project' with primary key '4'
+# has an invalid foreign key: crowdfunder_project.category_id contains a value 'Comics & Illustration'
+# that does not have a corresponding value in crowdfunder_category.id.
+
+
 class User(AbstractUser):
     bio = models.TextField(max_length=500, blank=True, null=True)
 
     def total_contributions(self):
         return sum([c.reward.amount for c in self.contributions.all()])
 
+
+class Category(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"{self.name}"
 
 class Project(models.Model):
     title = models.CharField(max_length=255)
@@ -19,6 +32,8 @@ class Project(models.Model):
     end_date = models.DateField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='projects')
     expired = models.BooleanField(default=False)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='categories', null=True)
+
     
     def total_contributions(self):
         return sum([c.reward.amount for c in self.contributions.all()])
