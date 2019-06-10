@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <h2>Total Money Raised: $ {{ gt }}</h2>
+    <h2>Total Number of Funded Projects: {{ funded }}</h2>
+    <h3>Percentage of Projects Funded: {{ percentage_funded }} %</h3>
+    <h3>Percentage of Projects Failed: {{ percentage_failed }} %</h3>
+    <h3>Percentage of Projects In Progress: {{ percentage_in_progress}} %</h3>
+
+    <a href="{% url 'success' %}"><h2>Successful Projects</a></h2></a>
     <h2>Featured Projects:</h2>
     {% for project in projects %}
     <ul>

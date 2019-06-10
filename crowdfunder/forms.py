@@ -36,7 +36,7 @@ class ProjectForm(ModelForm):
 
     class Meta:
         model = Project
-        fields = ['title', 'description', 'goal', 'start_date', 'end_date', 'category']
+        fields = ['title', 'description', 'goal', 'start_date', 'end_date', 'category', 'tags']
 
 class LoginForm(forms.Form):
     username = forms.CharField(label="User Name", max_length=64)

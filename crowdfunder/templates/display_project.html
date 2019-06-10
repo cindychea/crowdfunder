@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
+{% if error %}
+{{ error }}
+{% endif %}
 
 <h2>{{ project.title }}</h2>
 <h4>Goal: ${{ project.goal }}</h4>
@@ -53,6 +56,10 @@
 
     {{ form.as_p }}
     <button type="submit">Add Reward</button>
+</form>
+<form method='POST' action="{% url 'delete_project' project_id=project.pk %}">
+    {% csrf_token %}
+    <button type="submit">Delete This Project</button>
 </form>
 {% endif %}
 

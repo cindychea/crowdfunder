@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content%}
+<h2>Search Results: {{ projects.count }}</h2>
+<ul>
+    {% for project in projects %}
+        <li>
+            <a href="{% url 'display_project' project_id=project.pk %}">{{ project.title }}</a>
+            <p>{{ project.description }}</p>
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

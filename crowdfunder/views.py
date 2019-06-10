@@ -19,16 +19,19 @@ from crowdfunder.forms import ProjectForm, LoginForm, SignUpForm, RewardForm
 def root(request):
     return HttpResponseRedirect('/home')
 
-
 def home_page(request):
     context = {
         'title': 'Crowdfunder',
         'projects': Project.objects.all(),
         'categories': Category.objects.all()
+        'gt': Contribution.grand_total(),
+        'funded': Project.funded(), 
+        'percentage_funded': Project.percentage_funded(),
+        'percentage_failed': Project.percentage_failed(),
+        'percentage_in_progress': Project.percentage_in_progress()
     }
     response = render(request, 'home.html', context)
     return HttpResponse(response)
-
 
 def display_project(request, project_id):
     project = Project.objects.get(pk=project_id)
@@ -41,6 +44,21 @@ def display_project(request, project_id):
         'form':form
         }
     return render(request, 'display_project.html', context)
+
+@login_required
+def delete_project(request, project_id):
+    project = Project.objects.get(pk=project_id)
+    user = User.objects.get(id=request.user.id)
+    if request.user == project.owner and request.method == 'POST':
+        if project.contributions != 0:
+            context = {'project': project, 'error': 'You cannot delete a project that has contributions.'}
+            return render(request, 'display_project.html', context)
+        else:
+            project.delete()
+            return redirect('profile', id=user.id)
+    else:
+        context = {'project': project}
+        return render(request, 'display_project.html', context)
 
 @login_required
 def create_project(request):
@@ -58,6 +76,10 @@ def create_project(request):
         'project_form': form,
         'title': 'Create A Project'
     })
+
+def success(request):
+    projects = Project.success()
+    return render(request, 'success.html', {'projects': projects})
 
 @login_required
 def add_reward(request, project_id):
@@ -100,7 +122,6 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('home')
-
 
 def signup_view(request):
     if request.method == 'POST':
@@ -151,4 +172,13 @@ def categories_view(request, category_id):
         'projects': projects
     }
     response = render(request, 'category_display.html', context)
+
+def search(request):
+    query = request.GET['query']
+    search_results = Project.objects.filter(tags__icontains=query)
+    context = {
+        'projects': search_results,
+        'query': query
+    }
+    response = render(request, 'search.html', context)
     return HttpResponse(response)

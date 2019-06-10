@@ -22,12 +22,15 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', views.home_page, name='home'),
     path('project/<int:project_id>', views.display_project, name='display_project'),
+    path('project/<int:project_id>/delete', views.delete_project, name='delete_project'),
     path('project/<int:project_id>/add_reward', views.add_reward, name='add_reward'),
     path('project/<int:project_id>/contrib/<int:reward_id>/', views.back_project, name='back_project'),
     path('project/create', views.create_project, name='create_project'),
+    path('success/', views.success, name='success'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
     path('signup/', views.signup_view, name='signup'),
     path('profile/<int:id>/', views.profile_view, name='profile'),
-    path('categories/<int:category_id>/', views.categories_view, name='categories')
+    path('categories/<int:category_id>/', views.categories_view, name='categories'),
+    path('search/', views.search, name='search'),
 ]

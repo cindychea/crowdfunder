@@ -14,15 +14,14 @@
     <header>
         <a class="hero-title" href="{% url 'home' %}"><h1>Crowdfunder</h1></a>
         <div>
-            {% if request.user.is_authenticated %}
-            <a href="{% url 'logout' %}">Logout</a>
-            <a href="{% url 'profile' id=user.pk %}">Profile</a>
-            {% else %}
-            <a href="{% url 'login' %}">Login</a>
-            <a href="{% url 'signup' %}">Sign up</a>
-            {% endif %}
-            <!-- Search Bar go here -->
-            <a href="{% url 'create_project' %}">Create A Project</a>
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'logout' %}">Logout</a>
+        <a href="{% url 'profile' id=user.pk %}">Profile</a>
+        {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'signup' %}">Sign up</a>
+        {% endif %}
+        <a href="{% url 'create_project' %}">Create A Project</a>
         </div>  
         <nav>
             {% for category in categories %}
@@ -35,6 +34,13 @@
         </nav>
     </header>
     <main>
+        <form action="{% url 'search' %}" method="get">
+            <label for="project-search">
+                <span>Find a Project:</span>
+                <input type="search" id="project-search" name="query" value="{{ query }}"/>
+            </label>
+            <input type="submit" value="Search"/>
+        </form>
         {% block content %}
         {% endblock %}
     </main>
