@@ -3,7 +3,7 @@ html {
     font-family: 'Nunito', sans-serif;
     background-color: #FFF8F0;
 }
-*, *:before, *:after {
+*, :before, :after {
     box-sizing: inherit;
 }
 .hero-title {

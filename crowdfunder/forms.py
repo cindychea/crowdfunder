@@ -16,7 +16,7 @@ from django.contrib.auth.forms import UserCreationForm
 class RewardForm(forms.ModelForm):
     class Meta:
         model = Reward
-        fields = ('title', 'amount', 'description')
+        fields = ('title', 'amount', 'description', 'limit')
 
     def clean(self):
         data = super().clean()
