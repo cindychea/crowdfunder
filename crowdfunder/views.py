@@ -23,7 +23,7 @@ def home_page(request):
     context = {
         'title': 'Crowdfunder',
         'projects': Project.objects.all(),
-        'categories': Category.objects.all()
+        'categories': Category.objects.all(),
         'gt': Contribution.grand_total(),
         'funded': Project.funded(), 
         'percentage_funded': Project.percentage_funded(),
