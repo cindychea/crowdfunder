@@ -172,6 +172,7 @@ def categories_view(request, category_id):
         'projects': projects
     }
     response = render(request, 'category_display.html', context)
+    return HttpResponse(response)
 
 def search(request):
     query = request.GET['query']
