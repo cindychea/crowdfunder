@@ -85,17 +85,17 @@ class Project(models.Model):
     def percentage_funded():
         total = len(Project.objects.all())
         percent_funded = Project.funded() / total * 100
-        return format(percent_funded, '.2f')
+        return format(percent_funded, '.0f')
     
     def percentage_failed():
         total = len(Project.objects.all())
         percent_failed = len(Project.failed()) / total * 100
-        return format(percent_failed, '.2f')
+        return format(percent_failed, '.0f')
 
     def percentage_in_progress():
         total = len(Project.objects.all())
         percent_ip = (total - Project.funded() - len(Project.failed())) / total * 100
-        return format(percent_ip, '.2f')
+        return format(percent_ip, '.0f')
 
 class Reward(models.Model):
     title = models.CharField(max_length=255)
