@@ -26,15 +26,27 @@ class RewardForm(forms.ModelForm):
 
 
 class ProjectForm(ModelForm):
+
+    category_options = [
+        ('Arts', 'Arts'),
+        ('Comics & Illustration', 'Comics & Illustration'),
+        ('Design & Tech', 'Design & Tech'),
+        ('Film', 'Film'),
+        ('Food & Craft', 'Food & Craft'),
+        ('Games', 'Games'),
+        ('Music', 'Music')
+    ]
+
     title = forms.CharField(max_length=255)
     description = forms.Textarea()
     goal = forms.IntegerField(validators=[MinValueValidator(1, message='Goal must be a positive number')])
     start_date = forms.DateField(widget=DateInput(attrs={'type': 'date', 'min': dt.date.today()}))
     end_date = forms.DateField(widget=DateInput(attrs={'type': 'date', 'min': (dt.date.today() + dt.timedelta(days=1))}))
+    category = forms.CharField(label='Catergories: ', widget=forms.Select(choices=category_options))
 
     class Meta:
         model = Project
-        fields = ['title', 'description', 'goal', 'start_date', 'end_date']
+        fields = ['title', 'description', 'goal', 'start_date', 'end_date', 'category']
 
 class LoginForm(forms.Form):
     username = forms.CharField(label="User Name", max_length=64)

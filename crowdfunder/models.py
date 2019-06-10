@@ -11,6 +11,17 @@ class User(AbstractUser):
 
 
 class Project(models.Model):
+
+    category_options = [
+        ('Arts', 'Arts'),
+        ('Comics & Illustration', 'Comics & Illustration'),
+        ('Design & Tech', 'Design & Tech'),
+        ('Film', 'Film'),
+        ('Food & Craft', 'Food & Craft'),
+        ('Games', 'Games'),
+        ('Music', 'Music')
+    ]
+
     title = models.CharField(max_length=255)
     description = models.TextField()
     goal = models.IntegerField()
@@ -19,6 +30,7 @@ class Project(models.Model):
     end_date = models.DateField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='projects')
     expired = models.BooleanField(default=False)
+    category = models.CharField(max_length=255, choices=category_options, default='art')
     
     def project_contributors(self):
         contributors = []
