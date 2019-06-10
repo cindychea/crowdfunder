@@ -176,7 +176,7 @@ def categories_view(request, category_id):
 
 def search(request):
     query = request.GET['query']
-    search_results = Project.objects.filter(title__icontains=query) | Project.objects.filter(description__icontains=query) | Project.objects.filter(tags__icontains=query)
+    search_results = Project.objects.filter(title__icontains=query) | Project.objects.filter(description__icontains=query) | Project.objects.filter(tags__icontains=query) | Project.objects.filter(category__name__icontains=query)
     context = {
         'projects': search_results,
         'query': query
