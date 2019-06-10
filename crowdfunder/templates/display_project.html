@@ -25,13 +25,16 @@
             <p>${{ reward.amount }}</p>
             {% if reward.limit >= 1 %}
                 <p>Limit: {{ reward.limit }}</p>
+                <p>{{ reward.total_purchased }} Backers</p>
             {% endif %}
             {% if project.owner != user %}
                 {% if project.expired_project == False %}
-                    <form action="{% url 'back_project' project_id=project.id reward_id=reward.id %}" method="POST">
-                        {% csrf_token %}
-                        <button type="submit">Choose This Reward</button>
-                    </form>
+                    {% if reward.total_purchased < reward.limit %}
+                        <form action="{% url 'back_project' project_id=project.id reward_id=reward.id %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit">Choose This Reward</button>
+                        </form>
+                    {% endif %}
                 {% endif %}
             {% endif %}
         </li>

@@ -36,7 +36,9 @@ class Reward(models.Model):
     limit = models.IntegerField()
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='rewards')
 
-    
+    def total_purchased(self):
+        total = self.contributions.all().count()
+        return total
 
 
 class Contribution(models.Model):
