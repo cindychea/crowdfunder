@@ -33,7 +33,7 @@ class Reward(models.Model):
     title = models.CharField(max_length=255)
     amount = models.IntegerField()
     description = models.TextField()
-    limit = models.IntegerField()
+    limit = models.IntegerField(null=True, blank=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='rewards')
 
     def total_purchased(self):

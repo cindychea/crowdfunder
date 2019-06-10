@@ -29,7 +29,7 @@
             {% endif %}
             {% if project.owner != user %}
                 {% if project.expired_project == False %}
-                    {% if reward.total_purchased < reward.limit %}
+                    {% if reward.total_purchased < reward.limit or reward.limit == null%}
                         <form action="{% url 'back_project' project_id=project.id reward_id=reward.id %}" method="POST">
                             {% csrf_token %}
                             <button type="submit">Choose This Reward</button>
