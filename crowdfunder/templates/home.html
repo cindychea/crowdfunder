@@ -1,24 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Total Money Raised: $ {{ gt }}</h2>
-    <h2>Total Number of Funded Projects: {{ funded }}</h2>
-    <h3>Percentage of Projects Funded: {{ percentage_funded }} %</h3>
-    <h3>Percentage of Projects Failed: {{ percentage_failed }} %</h3>
-    <h3>Percentage of Projects In Progress: {{ percentage_in_progress}} %</h3>
-
-    <a href="{% url 'success' %}"><h2>Successful Projects</a></h2></a>
-    <h2>Featured Projects:</h2>
-    {% for project in projects %}
-    <ul>
-        <li>
-            <a href="{% url 'display_project' project_id=project.pk %}">Title: {{ project.title }}</a>
-            <p>Goal: {{ project.goal }}</p>
-            <p>Category: {{ project.category.name }}</p>
-            <p>Description: {{ project.description }}</p>
-            <p>Start Date: {{ project.start_date }}</p>
-            <p>End Date: {{ project.end_date }}</p>
-        </li>
+    <h2 class="featured-title">FEATURED PROJECTS</h2>
+    <ul class="featured-projects">
+        {% for project in projects %}
+            <li>
+                <img class="project-image" src="{{ project.image.url }}">
+                <h3><a href="{% url 'display_project' project_id=project.pk %}">{{ project.title }}</a></h3>
+                <p>Goal: ${{ project.goal }}</p>
+                <p>Category: {{ project.category.name }}</p>
+                <p>Description: {{ project.description }}</p>
+                <p>Start Date: {{ project.start_date }}</p>
+                <p>End Date: {{ project.end_date }}</p>
+            </li>
+        {% endfor %}
     </ul>
-    {% endfor %}
+    <!-- <div class="total-raised-container">
+        <a href="{% url 'success' %}"><h2>Successful Projects</h2></a>
+        <p>Total Money Raised: $ {{ gt }}</p>
+        <p>Total Number of Funded Projects: {{ funded }}</p>
+        <p>Percentage of Projects Funded: {{ percentage_funded }} %</p>
+        <p>Percentage of Projects Failed: {{ percentage_failed }} %</p>
+        <p>Percentage of Projects In Progress: {{ percentage_in_progress}} %</p>
+    </div> -->
 {% endblock %}

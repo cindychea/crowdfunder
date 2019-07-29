@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from crowdfunder import views
+from crowdfunder import views, settings
+from django.contrib.staticfiles.urls import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('', views.root),
@@ -34,3 +36,6 @@ urlpatterns = [
     path('categories/<int:category_id>/', views.categories_view, name='categories'),
     path('search/', views.search, name='search'),
 ]
+
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

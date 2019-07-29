@@ -25,7 +25,7 @@ def home_page(request):
         'projects': Project.objects.all(),
         'categories': Category.objects.all(),
         'gt': Contribution.grand_total(),
-        'funded': Project.funded(), 
+        'funded': Project.funded(),
         'percentage_funded': Project.percentage_funded(),
         'percentage_failed': Project.percentage_failed(),
         'percentage_in_progress': Project.percentage_in_progress()
@@ -39,6 +39,7 @@ def display_project(request, project_id):
     form = RewardForm()
     context = {
         'title': project.title,
+        'categories': Category.objects.all(),
         'project': project,
         'projects': projects,
         'form':form
@@ -57,7 +58,7 @@ def delete_project(request, project_id):
             project.delete()
             return redirect('profile', id=user.id)
     else:
-        context = {'project': project}
+        context = {'project': project, 'categories': Category.objects.all(),}
         return render(request, 'display_project.html', context)
 
 @login_required
@@ -74,7 +75,8 @@ def create_project(request):
 
     return render(request, 'create_project.html', {
         'project_form': form,
-        'title': 'Create A Project'
+        'title': 'Create A Project',
+        'categories': Category.objects.all(),
     })
 
 def success(request):
@@ -95,7 +97,8 @@ def add_reward(request, project_id):
         form = RewardForm()
 
     return render(request, 'display_project.html', {
-        'project_form': form
+        'project_form': form,
+        'categories': Category.objects.all(),
     })
 
 def login_view(request):
@@ -115,7 +118,7 @@ def login_view(request):
     else:
         form=LoginForm()
 
-    context = {'form': form, 'title': 'Login'}
+    context = {'form': form, 'title': 'Login', 'categories': Category.objects.all(),}
     return render(request, 'login.html', context)
 
 @login_required
@@ -136,14 +139,15 @@ def signup_view(request):
     else:
         form = SignUpForm()
 
-    context = {'form': form, 'title': 'Sign Up'}
+    context = {'form': form, 'title': 'Sign Up', 'categories': Category.objects.all()}
     return render(request, 'signup.html', context)
 
 @login_required
 def profile_view(request, id):
     user = User.objects.get(pk=id)
     context = {
-        'user': user
+        'user': user,
+        'categories': Category.objects.all()
         }
     return render(request, 'profile.html', context)
 
@@ -169,6 +173,7 @@ def categories_view(request, category_id):
     projects = Project.objects.filter(category=category)
     context = {
         'category': category,
+        'categories': Category.objects.all(),
         'projects': projects
     }
     response = render(request, 'category_display.html', context)
@@ -179,7 +184,8 @@ def search(request):
     search_results = Project.objects.filter(title__icontains=query) | Project.objects.filter(description__icontains=query) | Project.objects.filter(tags__icontains=query) | Project.objects.filter(category__name__icontains=query)
     context = {
         'projects': search_results,
-        'query': query
+        'query': query,
+        'categories': Category.objects.all()
     }
     response = render(request, 'search.html', context)
     return HttpResponse(response)

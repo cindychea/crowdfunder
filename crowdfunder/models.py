@@ -34,11 +34,12 @@ class Project(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='projects')
     expired = models.BooleanField(default=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='categories', null=True)
+    image = models.ImageField(upload_to='project-image/', null=True, blank=True)
     tags = TagField()
 
     def __str__(self):
         return self.title
-    
+
     def total_contributions(self):
         return sum([c.reward.amount for c in self.contributions.all()])
 
@@ -77,19 +78,19 @@ class Project(models.Model):
     def funded():
         funded = len(Project.success())
         return funded
-    
+
     def failed():
         failed = []
         for project in Project.objects.all():
             if project.expired == True and project.goal_reached == False:
                 failed.append(project)
         return failed
-    
+
     def percentage_funded():
         total = len(Project.objects.all())
         percent_funded = Project.funded() / total * 100
         return format(percent_funded, '.0f')
-    
+
     def percentage_failed():
         total = len(Project.objects.all())
         percent_failed = len(Project.failed()) / total * 100

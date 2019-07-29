@@ -7,6 +7,7 @@
 <h2>{{ project.title }}</h2>
 <h4>Goal: ${{ project.goal }}</h4>
 <h3>Created By: <a href="{% url 'profile' id=project.owner.pk %}">{{ project.owner }}</a></h3>
+<img src="{{ project.image.url }}" alt="Project Image">
 <h3>Days Remaining: {{ project.countdown }}</h3>
 <h5>Started on: {{ project.start_date }}</h5>
 <h5>Ends on: {{ project.end_date }}</h5>
