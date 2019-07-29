@@ -115,9 +115,12 @@ nav li {
 
 /* LOGIN */
 
+.login-form-center {
+    text-align: center;
+}
+
 .login-form-container {
     display: inline-block;
-    text-align: center;
     padding: 2em;
     margin: 2em;
     border: solid 2px darkslategrey;
