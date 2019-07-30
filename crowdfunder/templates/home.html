@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2 class="featured-title">FEATURED PROJECTS</h2>
+    <h2 class="featured-title">ACTIVE PROJECTS</h2>
     <ul class="featured-projects">
-        {% for project in projects %}
+        {% for project in active_projects %}
             <li>
                 <img class="project-image" src="{{ project.image.url }}">
                 <h3><a href="{% url 'display_project' project_id=project.pk %}">{{ project.title }}</a></h3>
@@ -15,12 +15,5 @@
             </li>
         {% endfor %}
     </ul>
-    <!-- <div class="total-raised-container">
-        <a href="{% url 'success' %}"><h2>Successful Projects</h2></a>
-        <p>Total Money Raised: $ {{ gt }}</p>
-        <p>Total Number of Funded Projects: {{ funded }}</p>
-        <p>Percentage of Projects Funded: {{ percentage_funded }} %</p>
-        <p>Percentage of Projects Failed: {{ percentage_failed }} %</p>
-        <p>Percentage of Projects In Progress: {{ percentage_in_progress}} %</p>
-    </div> -->
+    <a class="stats-link" href="{% url 'stats' %}">Site Stats</a>
 {% endblock %}

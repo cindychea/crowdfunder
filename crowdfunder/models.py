@@ -50,6 +50,14 @@ class Project(models.Model):
             contributors.append(contribution.user.username)
         return set(contributors)
 
+    def active():
+        all_projects = Project.objects.all()
+        active_projects = []
+        for project in all_projects:
+            if project.end_date > date.today():
+                active_projects.append(project)
+        return active_projects
+
     def expired_project(self):
         if date.today() > self.end_date:
             self.expired = True
@@ -72,6 +80,14 @@ class Project(models.Model):
         for project in all_projects:
             if project.total_contributions() >= project.goal:
                 project.goal_reached = True
+                projects.append(project)
+        return projects
+
+    def unsuccessful():
+        all_projects = Project.objects.all()
+        projects = []
+        for project in all_projects:
+            if project.total_contributions() <= project.goal and date.today() > project.end_date:
                 projects.append(project)
         return projects
 

@@ -23,12 +23,8 @@ def home_page(request):
     context = {
         'title': 'Crowdfunder',
         'projects': Project.objects.all(),
+        'active_projects': Project.active(),
         'categories': Category.objects.all(),
-        'gt': Contribution.grand_total(),
-        'funded': Project.funded(),
-        'percentage_funded': Project.percentage_funded(),
-        'percentage_failed': Project.percentage_failed(),
-        'percentage_in_progress': Project.percentage_in_progress()
     }
     response = render(request, 'home.html', context)
     return HttpResponse(response)
@@ -42,7 +38,7 @@ def display_project(request, project_id):
         'categories': Category.objects.all(),
         'project': project,
         'projects': projects,
-        'form':form
+        'form': form
         }
     return render(request, 'display_project.html', context)
 
@@ -82,6 +78,21 @@ def create_project(request):
 def success(request):
     projects = Project.success()
     return render(request, 'success.html', {'projects': projects})
+
+def unsuccessful(request):
+    projects = Project.unsuccessful()
+    return render(request, 'unsuccessful.html', {'projects': projects})
+
+def stats(request):
+    context = {
+        'categories': Category.objects.all(),
+        'gt': Contribution.grand_total(),
+        'funded': Project.funded(),
+        'percentage_funded': Project.percentage_funded(),
+        'percentage_failed': Project.percentage_failed(),
+        'percentage_in_progress': Project.percentage_in_progress(),
+    }
+    return render(request, 'stats.html', context)
 
 @login_required
 def add_reward(request, project_id):

@@ -22,7 +22,7 @@ a {
 }
 
 a:hover {
-    text-decoration: underline;
+    text-decoration: underline #FCB07E;
 }
 
 
@@ -64,6 +64,11 @@ header {
     border-radius: 5px;
     padding: 10px;
     color: #FFF8F0;
+    text-decoration: none;
+}
+
+.login-container a:hover {
+    text-decoration: underline #FCB07E;
 }
 
 nav {
@@ -83,13 +88,13 @@ nav ul {
 
 nav li {
     display: inline;
-    background-color: #FCB07E;
     border-radius: 5px;
     padding: 10px;
+    font-weight: bold;
 }
 
 
-/* FEATURED PROJECTS */
+/* HOME FEATURED PROJECTS */
 
 .featured-title {
     text-align: center;
@@ -106,14 +111,18 @@ nav li {
 .featured-projects li {
     margin: 1em;
     padding: 2em 4em;
-    border: solid 2px darkslategrey;
+    border: solid 2px darkslategray;
 }
 
 .project-image {
     width: 80%;
 }
 
-/* LOGIN */
+.stats-link {
+
+}
+
+/* LOGIN PAGE */
 
 .login-form-center {
     text-align: center;
@@ -126,6 +135,127 @@ nav li {
     border: solid 2px darkslategrey;
     border-radius: 10%;
 }
+
+/* SIGN UP PAGE */
+
+.sign-in-container {
+    text-align: center;
+}
+
+.sign-in-form {
+    display: inline-block;
+    padding: 2em 8em;
+    margin: 2em;
+    background-color: #3581B8;
+    color: #FFF8F0;
+    /* border: solid 2px darkslategrey;
+    border-radius: 10%; */
+}
+
+.field-area {
+    display: flex;
+    flex-direction: column;
+}
+
+.field-container {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline;
+    padding: .25em;
+    margin-top: 1.5em;
+}
+
+  /* Tooltip text */
+.tooltip .tooltiptext {
+    width: 25em;
+    visibility: hidden;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+  /* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+
+/* PROJECT PAGE */
+
+.heading {
+    font-size: 1.5em;
+}
+.goal-heading {
+    border: 0.25em solid #FCB07E;
+    border-radius: 10px;
+    margin: 0 2em 2em 2em;
+    padding: 1em;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.project-container {
+    margin: 0 12em;
+}
+
+.project-container img.project-image {
+    width:100%;
+}
+
+.project-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.project-info div {
+    padding: 0 2em 2em 2em;
+}
+
+.title {
+    font-size: 2em;
+    padding: 0 1.5em;
+    margin: 0;
+}
+
+h4.title {
+    padding: 0;
+}
+
+.reward-list {
+    list-style: none;
+}
+
+.reward-container {
+    border: 0.25em solid #3581B8;
+    padding: 1em 3em;
+    border-radius: 10px;
+}
+
+.reward-title {
+    font-size: 1.5em;
+    text-decoration: underline;
+    margin: 0;
+}
+
+.reward-button {
+    background: #FCB07E;
+    color: darkslategrey;
+    padding: 1em;
+    font-size: 1em;
+    border-radius: 10px;
+}
+
 
 /* FOOTER */
 

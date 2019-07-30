@@ -4,72 +4,80 @@
 {{ error }}
 {% endif %}
 
-<h2>{{ project.title }}</h2>
-<h4>Goal: ${{ project.goal }}</h4>
-<h3>Created By: <a href="{% url 'profile' id=project.owner.pk %}">{{ project.owner }}</a></h3>
-<img src="{{ project.image.url }}" alt="Project Image">
-<h3>Days Remaining: {{ project.countdown }}</h3>
-<h5>Started on: {{ project.start_date }}</h5>
-<h5>Ends on: {{ project.end_date }}</h5>
-<h3>Amount Raised: ${{ project.total_contributions }}</h3>
-<p>Category: {{ project.category.name }}</p>
+    <div class="project-container">
+        <h2 class="featured-title">{{ project.title }}</h2>
+        <h4 class="title">Goal: ${{ project.goal }}</h4>
+        <h3>Created By: <a href="{% url 'profile' id=project.owner.pk %}">{{ project.owner }}</a></h3>
+        <img class="project-image" src="{{ project.image.url }}" alt="Project Image">
+        <div class="project-info">
+            <div>
+                <h3 class="heading">Days Remaining: {{ project.countdown }}</h3>
+                <p>Started on: {{ project.start_date }}</p>
+                <p>Ends on: {{ project.end_date }}</p>
+            </div>
+            <div>
+                <h3 class="heading">Amount Raised: ${{ project.total_contributions }}</h3>
+                <p>Category: {{ project.category.name }}</p>
+            </div>
+        </div>
 
-{% if request.user.username in project.project_contributors %}
-<h6>* You have already contributed to this project *</h6>
-{% endif %}
+        {% if request.user.username in project.project_contributors %}
+        <h6>* You have already contributed to this project *</h6>
+        {% endif %}
 
-{% if project.expired_project == True %}
-    {% if project.goal_reached == True %}
-        <h3>Project goal has been reached!</h3>
-    {% else %}
-        <h3>Project goal has not been reached.</h3>
-    {% endif %}
-{% endif %}
+        {% if project.expired_project == True %}
+        {% if project.goal_reached == True %}
+        <h3 class="goal-heading">Project goal has been reached!</h3>
+        {% else %}
+        <h3 class="goal-heading">Project goal has not been reached.</h3>
+        {% endif %}
+        {% endif %}
 
-<h3>Rewards:</h3>
-{% for reward in project.rewards.all %}
-    <ul>
-        <li>
-            <p>{{ reward.title }}</p>
-            <p>{{ reward.description }}</p>
-            <p>${{ reward.amount }}</p>
-            {% if reward.limit >= 1 %}
+        <h3 class="title">Rewards</h3>
+        {% for reward in project.rewards.all %}
+        <ul class="reward-list">
+            <li class="reward-container">
+                <p class="reward-title">{{ reward.title }}</p>
+                <p>{{ reward.description }}</p>
+                <p>${{ reward.amount }}</p>
+                {% if reward.limit >= 1 %}
                 <p>Limit: {{ reward.limit }}</p>
                 <p>{{ reward.total_purchased }} Backers</p>
-            {% endif %}
-            {% if project.owner != user %}
-                {% if project.expired_project == False %}
-                    {% if reward.available %}
-                        <form action="{% url 'back_project' project_id=project.id reward_id=reward.id %}" method="POST">
-                            {% csrf_token %}
-                            <button type="submit">Choose This Reward</button>
-                        </form>
-                    {% endif %}
                 {% endif %}
-            {% endif %}
-        </li>
-    </ul>
-{% endfor %}
+                {% if project.owner != user %}
+                {% if project.expired_project == False %}
+                {% if reward.available %}
+                <form action="{% url 'back_project' project_id=project.id reward_id=reward.id %}" method="POST">
+                    {% csrf_token %}
+                    <button class="reward-button" type="submit">Choose This Reward</button>
+                </form>
+                {% endif %}
+                {% endif %}
+                {% endif %}
+            </li>
+        </ul>
+        {% endfor %}
 
-{% if project.owner == user %}
-<form method = 'POST' action="{% url 'add_reward' project_id=project.pk %}">
-    {% csrf_token %}
+        {% if project.owner == user %}
+        <form method = 'POST' action="{% url 'add_reward' project_id=project.pk %}">
+            {% csrf_token %}
 
-    {{ form.as_p }}
-    <button type="submit">Add Reward</button>
-</form>
-<form method='POST' action="{% url 'delete_project' project_id=project.pk %}">
-    {% csrf_token %}
-    <button type="submit">Delete This Project</button>
-</form>
-{% endif %}
+            {{ form.as_p }}
+            <button type="submit">Add Reward</button>
+        </form>
+        <form method='POST' action="{% url 'delete_project' project_id=project.pk %}">
+            {% csrf_token %}
+            <button type="submit">Delete This Project</button>
+        </form>
+        {% endif %}
 
-<p>Other Projects by this Creator:</p>
-{% for project in projects %}
-    <ul>
-        <li>
-            <a href="{% url 'display_project' project_id=project.id %}">{{ project.title }}</a>
-        </li>
-    </ul>
-{% endfor %}
+        <p class="heading">See other projects by this creator!</p>
+        {% for project in projects %}
+        <ul class="reward-list">
+            <li>
+                <a href="{% url 'display_project' project_id=project.id %}">{{ project.title }}</a>
+            </li>
+        </ul>
+        {% endfor %}
+    </div>
 {% endblock %}

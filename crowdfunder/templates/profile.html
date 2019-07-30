@@ -23,7 +23,7 @@
     {% endfor %}
 
     <h3>Contributions</h3>
-    <h4>My Total Contributions: {{ user.total_contributions }}</h4>
+    <h4>My Total Contributions: ${{ user.total_contributions }}</h4>
     {% for contribution in user.contributions.all %}
         <ul>
             <li>

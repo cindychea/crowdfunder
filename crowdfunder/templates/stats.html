@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2 class="featured-title">CROWDFUNDER STATS</h2>
+    <div class="total-raised-container">
+        <a href="{% url 'success' %}"><h2>Successful Projects</h2></a>
+        <a href="{% url 'unsuccessful' %}"><h2>Unsuccessful Projects</h2></a>
+        <p>Total Money Raised: $ {{ gt }}</p>
+        <p>Total Number of Funded Projects: {{ funded }}</p>
+        <p>Percentage of Projects Funded: {{ percentage_funded }} %</p>
+        <p>Percentage of Projects Failed: {{ percentage_failed }} %</p>
+        <p>Percentage of Projects In Progress: {{ percentage_in_progress}} %</p>
+    </div>
+{% endblock %}
