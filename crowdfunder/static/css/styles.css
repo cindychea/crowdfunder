@@ -53,6 +53,12 @@ header {
     margin: 2.5em;
 }
 
+#project-search {
+    border: 1px solid #ddd;
+    padding: 5px;
+    border-radius: 5px;
+}
+
 .login-container {
     margin-left: 1em;
 }
@@ -73,9 +79,12 @@ header {
 
 nav {
     grid-column: 1 / span 2;
-    border-top: solid 2px darkslategrey;
-    border-bottom: solid 2px darkslategrey;
-    width: 95%;
+    border: none;
+    background-color: rgb(252, 176, 126, 0.25);
+    width: 100%;
+    /* border-top: solid 2px darkslategrey;
+    border-bottom: solid 2px darkslategrey; */
+    /* width: 95%; */
     margin: auto;
 }
 
@@ -91,6 +100,7 @@ nav li {
     border-radius: 5px;
     padding: 10px;
     font-weight: bold;
+    font-size: 18px;
 }
 
 
@@ -111,7 +121,10 @@ nav li {
 .featured-projects li {
     margin: 1em;
     padding: 2em 4em;
-    border: solid 2px darkslategray;
+    background-color: #fff;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    /* border: solid 2px darkslategray; */
 }
 
 .project-image {
@@ -260,7 +273,7 @@ h4.title {
 /* FOOTER */
 
 footer {
-    background-color: #FCB07E;
+    background-color: rgb(252, 176, 126, 0.25);
     color: darkslategrey;
     position: relative;
     bottom: 0;
