@@ -132,7 +132,7 @@ nav li {
 }
 
 .stats-link {
-
+    margin: 1em;
 }
 
 /* LOGIN PAGE */
@@ -228,7 +228,7 @@ nav li {
 
 .project-info {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-c olumns: 1fr 1fr;
 }
 
 .project-info div {
@@ -269,6 +269,75 @@ h4.title {
     border-radius: 10px;
 }
 
+/* PROFILE */
+
+.profile {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+
+.profile-container {
+    grid-column: 1 / span 1;
+    padding: 0 2em;
+}
+
+.profile-container h2 {
+    font-size: 2em;
+    padding-bottom: 1em;
+}
+
+.profile-container p {
+    margin: 0;
+}
+
+.profile-projects-container {
+    grid-column: 2 / span 1;
+    margin: 1em 2em;
+}
+
+.profile-projects-container h1 {
+    font-size: 2em;
+    text-decoration: underline #FCB07E;
+    text-align: center;
+}
+
+.profile-projects-container ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0;
+}
+
+.profile-projects-container li {
+    margin: 1em;
+    padding: 2em 4em;
+    background-color: #fff;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.profile-projects-container img {
+    width: 80%;
+}
+
+
+.contribution-container {
+    grid-column: 2 / span 1;
+    margin: 0 auto;
+}
+
+.contribution-container h3 {
+    font-size: 2em;
+    text-decoration: underline #FCB07E;
+    text-align: center;
+}
+
+.contribution-container ul {
+    list-style: none;
+    border: 0.25em solid #3581B8;
+    padding: 1em 3em;
+    border-radius: 10px;
+}
 
 /* FOOTER */
 
