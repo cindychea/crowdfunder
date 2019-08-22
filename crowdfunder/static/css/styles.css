@@ -267,12 +267,13 @@ nav li {
 }
 
 .project-container img.project-image {
-    width:100%;
+    width: 100%;
+    border: solid 1px black;
 }
 
 .project-info {
     display: grid;
-    grid-template-c olumns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
 }
 
 .project-info div {
@@ -291,11 +292,13 @@ h4.title {
 
 .reward-list {
     list-style: none;
+    padding: 0;
 }
 
 .reward-container {
     border: 0.25em solid #3581B8;
     padding: 1em 3em;
+    margin: .25em;
     border-radius: 10px;
 }
 
@@ -311,6 +314,58 @@ h4.title {
     padding: 1em;
     font-size: 1em;
     border-radius: 10px;
+}
+
+.reward-button:hover {
+    background: #3581B8;
+    cursor: pointer;
+    color: #FCB07E;
+}
+
+.create-reward-container {
+    text-align: center;
+}
+
+.create-reward-container h3 {
+    font-size: 2em;
+    margin: 3em 0 0 0;
+    text-decoration: underline;
+}
+
+.create-reward-container form {
+    display: inline-block;
+    padding: 2em 8em;
+    margin: 2em;
+    border: solid 3px #3581B8;
+    border-radius: 5%;
+}
+
+.add-reward-button {
+    background: #FCB07E;
+    color: darkslategrey;
+    padding: 1em;
+    font-size: .75em;
+    border-radius: 10px;
+}
+
+.add-reward-button:hover {
+    background: #3581B8;
+    cursor: pointer;
+    color: #FCB07E;
+}
+
+.delete-project-button {
+    background: #FCB07E;
+    color: darkslategrey;
+    margin: 3em 0;
+    padding: 1em;
+    font-size: 1em;
+    border-radius: 10px;
+}
+
+.delete-project-button:hover {
+    background: red;
+    cursor: pointer;
 }
 
 /* PROFILE */
