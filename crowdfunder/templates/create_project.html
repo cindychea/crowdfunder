@@ -1,12 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h2>Create A Project</h2>
-
-<form action="{% url 'create_project' %}" method="POST">
-    {% csrf_token %}
-    {{ project_form.as_p }}
-    <button type="submit">Submit</button>
-</form>
+<div class="create-project-container">
+    <h2>Create A Project</h2>
+    
+    <form action="{% url 'create_project' %}" method="POST" class="create-project-form">
+        {% csrf_token %}
+        <div class="field-area">
+            {% for field in project_form %}
+                    <div class="field-container">
+                        <p>{{ field.name }}:</br>{{ field }}</p>
+                        {% if field.help_text %}
+                            <div class="tooltip">
+                                <i class="fas fa-question-circle"></i><span class="tooltiptext">{{ field.help_text }}</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</div>
 
 {% endblock %}

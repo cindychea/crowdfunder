@@ -161,8 +161,8 @@ nav li {
     margin: 2em;
     background-color: #3581B8;
     color: #FFF8F0;
-    /* border: solid 2px darkslategrey;
-    border-radius: 10%; */
+    border: solid 2px darkslategrey;
+    border-radius: 5%;
 }
 
 .field-area {
@@ -201,6 +201,43 @@ nav li {
   /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
     visibility: visible;
+}
+
+/* CREATE A PROJECT PAGE */
+
+.create-project-form {
+    display: inline-block;
+    padding: 2em 8em;
+    margin: 2em;
+    background-color: #3581B8;
+    color: #FFF8F0;
+    border: solid 2px darkslategrey;
+    border-radius: 5%;
+}
+
+.create-project-container {
+    text-align: center;
+}
+
+.sign-in-form {
+    display: inline-block;
+    padding: 2em 8em;
+    margin: 2em;
+    background-color: #3581B8;
+    color: #FFF8F0;
+    border: solid 2px darkslategrey;
+    border-radius: 5%;
+}
+
+.field-area {
+    display: flex;
+    flex-direction: column;
+}
+
+.field-container {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
