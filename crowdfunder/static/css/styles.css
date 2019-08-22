@@ -135,6 +135,10 @@ nav li {
     margin: 1em;
 }
 
+.stats-link:hover {
+    font-weight: bold;
+}
+
 /* LOGIN PAGE */
 
 .login-form-center {
@@ -437,6 +441,26 @@ h4.title {
     padding: 1em 3em;
     border-radius: 10px;
 }
+
+/* STATS PAGES */
+
+.success-links {
+    text-align: center;
+}
+
+.success-links h2 {
+    display: inline;
+    padding: 0 1em;
+}
+
+.total-raised-container p {
+    text-align: center;
+}
+
+.stats-titles {
+    margin-left: 2em;
+}
+
 
 /* FOOTER */
 

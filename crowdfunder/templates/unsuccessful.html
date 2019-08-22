@@ -2,15 +2,18 @@
 
 {% block content %}
 
-    <h2>Unsuccessful Projects</h2>
-    <h4>All of the following projects did not meet their goal.</h4>
-    {% for project in projects %}
-    <ul>
-        <li>
-            <a href="{% url 'display_project' project_id=project.pk %}">Title: {{ project.title }}</a>
-            <p>Goal: {{ project.goal }}</p>
-            <p>Description: {{ project.description }}</p>
-        </li>
+    <div class="stats-titles">
+        <h2>Unsuccessful Projects</h2>
+        <h4>All of the following projects did not meet their goal.</h4>
+    </div>
+    <ul class="featured-projects">
+        {% for project in projects %}
+            <li>
+                <a href="{% url 'display_project' project_id=project.pk %}">Title: {{ project.title }}</a>
+                <p>Goal: {{ project.goal }}</p>
+                <p>Description: {{ project.description }}</p>
+            </li>
+        {% endfor %}
     </ul>
-    {% endfor %}
+    <a class="stats-link" href="{% url 'stats' %}">back</a>
 {% endblock %}
