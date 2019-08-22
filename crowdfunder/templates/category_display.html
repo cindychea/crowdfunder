@@ -1,20 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{{category.name}}</h1>
+<h1 class="featured-title">{{category.name}}</h1>
 {% if projects.count == 0 %}
-    <p>There are no projects under this category.</p>
+    <p class="no-projects">There are no projects under this category.</p>
 {% endif %}
-{% for project in projects %}
-    <ul>
+<ul class="featured-projects">
+    {% for project in projects %}
         <li>
-            <a href="{% url 'display_project' project_id=project.pk %}">{{ project.title }}</a>
+            <img class="project-image" src="{{ project.image.url }}">
+            <h3><a href="{% url 'display_project' project_id=project.pk %}">{{ project.title }}</a></h3>
             <p>Goal: {{ project.goal }}</p>
             <p>Category: {{ project.category.name }}</p>
             <p>Description: {{ project.description }}</p>
             <p>Start Date: {{ project.start_date }}</p>
             <p>End Date: {{ project.end_date }}</p>
         </li>
-    </ul>
-{% endfor %}
+    {% endfor %}
+</ul>
 {% endblock %}
