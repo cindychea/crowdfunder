@@ -81,8 +81,8 @@ DATABASES = {
         'NAME': 'crowdfunder_db',
         'USER': 'brodycurrie',
         'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '',
+        'HOST': 'ec2-23-21-148-223.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
