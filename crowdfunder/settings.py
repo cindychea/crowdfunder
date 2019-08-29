@@ -25,7 +25,7 @@ SECRET_KEY = 'k=ne#r!3or%u^!l&4e+g3o%-8mhb*-nse#%ue34b7tv4#jvrvv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['crowdfunder-brjaci.herokuapp.com']
+ALLOWED_HOSTS = ['crowdfunder-brjaci.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -77,8 +77,12 @@ WSGI_APPLICATION = 'crowdfunder.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'crowdfunder_db',
+        'USER': 'brodycurrie',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
