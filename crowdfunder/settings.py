@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'k=ne#r!3or%u^!l&4e+g3o%-8mhb*-nse#%ue34b7tv4#jvrvv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['crowdfunder-brjaci.herokuapp.com', 'localhost']
 
