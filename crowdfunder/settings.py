@@ -79,8 +79,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'crowdfunder_db',
-        'USER': 'brodycurrie',
-        'PASSWORD': 'Vulfpeck1612',
+        'USER': 'postgres',
         'HOST': 'ec2-23-21-148-223.compute-1.amazonaws.com',
         'PORT': '5432',
     }
