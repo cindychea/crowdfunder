@@ -83,7 +83,7 @@ DATABASES = {
         'NAME': 'crowdfunder_db',
         'USER': 'postgres',
         'HOST': 'localhost',
-        'PORT': '5432',
+        # 'PORT': '543'
     }
 }
 
@@ -128,7 +128,7 @@ MEDIA_URL = '/media/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'crowdfunder.User'
